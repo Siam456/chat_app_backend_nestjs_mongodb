@@ -12,11 +12,13 @@ export const UserSchema = new mongoose.Schema(
       require: true,
       trim: true,
       lowercase: true,
+      unique: true,
     },
     phone: {
       type: String,
       require: true,
       trim: true,
+      unique: true,
     },
     password: {
       type: String,
