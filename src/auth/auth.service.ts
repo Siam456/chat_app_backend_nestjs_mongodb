@@ -39,10 +39,25 @@ export class AuthService {
     return null;
   }
 
-  async login(user: any) {
-    const payload = { username: user.username, sub: user._id };
-    return {
-      access_token: this.jwtService.sign(payload),
+  async login(user: any, res: any): Promise<any> {
+    const payload = {
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      avater: user.avatar,
+      role: user.role,
+      _id: user._id,
     };
+    const access_token = this.jwtService.sign(payload);
+    res.cookie('chat_app', access_token, {
+      httpOnly: true,
+      maxAge: 86400000,
+      signed: true,
+    });
+    res.locals.loogedInUser = payload;
+    res.status(200).json({
+      msg: 'Login Successfully',
+      access_token: this.jwtService.sign(payload),
+    });
   }
 }
