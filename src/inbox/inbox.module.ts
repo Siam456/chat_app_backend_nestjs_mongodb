@@ -3,7 +3,7 @@ import { ConversationService } from './conversation.service';
 import { InboxController } from './inbox.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConversationSchema } from './schema/conversation.schema';
-import { InboxService } from './inbox.service';
+import { MsgService } from './inbox.service';
 import { MsgSchema } from './schema/message.schema';
 
 @Module({
@@ -13,7 +13,7 @@ import { MsgSchema } from './schema/message.schema';
     ]),
     MongooseModule.forFeature([{ name: 'message', schema: MsgSchema }]),
   ],
-  providers: [ConversationService, InboxService],
+  providers: [ConversationService, MsgService],
   controllers: [InboxController],
 })
 export class InboxModule {}
