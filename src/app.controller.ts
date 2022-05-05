@@ -28,4 +28,10 @@ export class AppController {
   getProfile(@Req() req: Request) {
     return req.user;
   }
+
+  @Post('profile')
+  @UseGuards(JwtAuthGuard)
+  async postProfile(@Req() req: Request): Promise<any> {
+    return Promise.resolve('siam');
+  }
 }
